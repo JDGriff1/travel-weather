@@ -1,0 +1,19 @@
+.location-input {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    color: #333;
+    align-items: center;
+}
+
+.location-input-field {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.location-input-field::placeholder {
+    color: white;
+    opacity: 0.7;
+}

@@ -1,0 +1,17 @@
+.route-planner-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 20px;
+}
+
+.location-inputs {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+
+.route-planner-actions {
+    margin-top: 50px;
+}

@@ -1,0 +1,12 @@
+.route-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.route-weather-details {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    max-width: 60vw;
+    overflow-x: auto;
+}
