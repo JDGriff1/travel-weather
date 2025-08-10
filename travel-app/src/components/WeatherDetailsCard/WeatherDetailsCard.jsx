@@ -1,8 +1,11 @@
+import { useTranslation } from "react-i18next";
 import "./WeatherDetailsCard.css";
 
 export const WeatherDetailsCard = ({ weather, title }) => {
+    const { t } = useTranslation();
+    
     if (!weather) {
-        return <div className="details-card">No weather details available.</div>;
+        return <div className="details-card">{t('weatherDetails.noDataAvailable')}</div>;
     }
 
     const getWeatherIcon = (iconSrc, alt) => {

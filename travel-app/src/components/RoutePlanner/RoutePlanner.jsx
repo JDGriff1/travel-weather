@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { RoutePlannerResults } from "./RoutePlannerResults";
 import { RoutePlannerSearch } from "./RoutePlannerSearch";
 import { getTravelDataAsync } from "../../services/TravelServices";
 
 export const RoutePlanner = () => {
+    const { t } = useTranslation();
     const [origin, setOrigin] = useState("");
     const [destination, setDestination] = useState("");
     const [results, setResults] = useState({});
@@ -19,7 +21,7 @@ export const RoutePlanner = () => {
 
     const clickPlanRoute = () => {
         if (!origin || !destination) {
-            alert("Please enter both origin and destination.");
+            alert(t('routePlanner.search.validationError'));
             return;
         }
         setLoading(true);
@@ -41,7 +43,7 @@ export const RoutePlanner = () => {
             return;
         }
 
-        alert("Failed to fetch route details. Please try again.");
+        alert(t('routePlanner.search.fetchError'));
         setResults({});
     }
 

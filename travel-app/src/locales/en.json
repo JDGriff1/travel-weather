@@ -1,0 +1,33 @@
+{
+  "app": {
+    "title": "Travel Weather"
+  },
+  "routePlanner": {
+    "search": {
+      "originLabel": "Origin",
+      "destinationLabel": "Destination",
+      "originPlaceholder": "Enter origin",
+      "destinationPlaceholder": "Enter destination",
+      "planRouteButton": "Plan Route",
+      "validationError": "Please enter both origin and destination.",
+      "fetchError": "Failed to fetch route details. Please try again."
+    },
+    "results": {
+      "title": "Route Results",
+      "loading": "Loading...",
+      "noResults": "No results found. Please try again.",
+      "searchAgainButton": "Search Again"
+    }
+  },
+  "routeDetails": {
+    "title": "Route Summary",
+    "noDataAvailable": "No route details available.",
+    "start": "Start",
+    "end": "End",
+    "distance": "Distance",
+    "duration": "Duration"
+  },
+  "weatherDetails": {
+    "noDataAvailable": "No weather details available."
+  }
+}
