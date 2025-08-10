@@ -4,7 +4,11 @@ This repository contains the client for a travel weather app built with React.js
 
 ## Features
 - Search by origin and destination city
-- View current weather conditions
+- View current weather conditions for chosen locations
+- Localisation support for multiple languages (English by default)
+
+## Improvements
+- [ ] - Responsive design to work on various devices
 
 ## Installation
 1. Clone the repository:

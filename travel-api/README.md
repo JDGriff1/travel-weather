@@ -1,6 +1,24 @@
 # Travel API
 This API provides endpoints for travel and weather information.
 
+## Implementation Notes
+- The API is built with Express.js.
+- The health check endpoint is used to verify the API's operational status.
+
+## Features
+- [x] - Travel route searching
+- [x] - Weather data retrieval based on travel plans
+- [x] - Integration with Google Maps API for maps services
+- [x] - Unit tests covering API with Jest
+- [x] - Documentation for API endpoints using Swagger
+- [x] - Weather fetching and combined with travel data
+
+## Future Improvements 
+- [ ] - Improve CORS handling for allowing cross-origin requests
+- [ ] - Error handling and logging for better debugging
+- [ ] - Add more detailed weather information
+- [ ] - Implement rate limiting to prevent abuse of the API
+
 ## Health Check
 - **GET** `/health`: Returns the health status of the API.
 - **GET** `/health/detailed`: Returns detailed health information about the API.
