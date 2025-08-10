@@ -1,5 +1,7 @@
 require('dotenv').config();
 const express = require('express');
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -25,6 +27,21 @@ app.get('/', (req, res) => {
     }
   });
 });
+
+const options = {
+    definition: {
+        openapi: "3.1.0",
+        info: {
+            title: "Travel API",
+            version: "1.0.0",
+            description: "API for travel and weather information"
+        }
+    },
+    apis: ["./routes/*.js"],
+}
+
+const swaggerSpec = swaggerJsDoc(options);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.listen(PORT, () => {
   console.log(`Travel API server running on port ${PORT}`);
