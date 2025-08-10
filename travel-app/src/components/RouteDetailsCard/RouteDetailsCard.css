@@ -2,17 +2,11 @@
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 20px;
-    margin: 20px 0;
+    padding: 1rem;
+    margin: 10px 0;
 }
 
 .route-details-title {
     font-size: 1.5rem;
     color: #333;
-}
-
-.route-details-content {
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: row;
 }

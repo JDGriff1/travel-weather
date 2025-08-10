@@ -9,16 +9,18 @@ export const RouteDetailsCard = ({ route }) => {
     }
 
     return (
-        <div className="details-card">
-            <h2 className="route-details-title">{t('routeDetails.title')}</h2>
-            <div className="route-details-content">
-                <div className="route-details-info">
-                    <p><strong>{t('routeDetails.start')}:</strong> {route.start.address}</p>
-                    <p><strong>{t('routeDetails.end')}:</strong> {route.end.address}</p>
+        <div className="details-card grid">
+            <div className="col-12">
+                <h2 className="route-details-title">{t('routeDetails.title')}</h2>
+            </div>
+            <div className="grid col-12 align-items-center">
+                <div className="col-12 md:col-6 flex flex-column align-items-start justify-content-center">
+                    <span><strong>{t('routeDetails.start')}:</strong> {route.start.address}</span>
+                    <span><strong>{t('routeDetails.end')}:</strong> {route.end.address}</span>
                 </div>
-                <div className="route-details-info">
-                    <p><strong>{t('routeDetails.distance')}:</strong> {route.distance}</p>
-                    <p><strong>{t('routeDetails.duration')}:</strong> {route.duration}</p>
+                <div className="col-12 md:col-6 flex flex-column align-items-start justify-content-center">
+                    <span><strong>{t('routeDetails.distance')}:</strong> {route.distance}</span>
+                    <span><strong>{t('routeDetails.duration')}:</strong> {route.duration}</span>
                 </div>
             </div>
         </div>

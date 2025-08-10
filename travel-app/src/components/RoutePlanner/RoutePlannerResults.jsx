@@ -41,12 +41,14 @@ export const RoutePlannerResults = ({ results, loading, onSearchAgain }) => {
             <h2>{t('routePlanner.results.title')}</h2>
             <div className="route-details">
                 <div>{summaryCard}</div>
-                <div className="route-weather-details">
-                    <div>{startWeather}</div>
-                    <div>{endWeather}</div>
+                <div className="flex flex-row align-items-center gap-2">
+                    <div className="flex-grow-1">{startWeather}</div>
+                    <div className="flex-grow-1">{endWeather}</div>
                 </div>
             </div>
-            <button className="search-again-button" onClick={onSearchAgain}>{t('routePlanner.results.searchAgainButton')}</button>
+            <div className="results-actions">
+                <button className="search-again-button" onClick={onSearchAgain}>{t('routePlanner.results.searchAgainButton')}</button>
+            </div>
         </div>
     );
 }

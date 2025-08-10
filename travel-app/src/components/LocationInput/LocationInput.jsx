@@ -14,7 +14,7 @@ export const LocationInput = ({ label, value, onChange }) => {
     };
 
     return (
-        <div className="location-input">
+        <div className="col-12 md:col-6 flex flex-column md:flex-row align-items-center location-input">
             <label>{label}</label>
             <input
                 className="location-input-field"

@@ -1,6 +1,6 @@
 .app {
   max-width: 1280px;
-  padding: 2rem;
+  margin: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,11 +24,14 @@
 
 .app-main {
   text-align: center;
-  padding: 2rem;
 }
 
 .app-main p {
   font-size: 1.1rem;
+  color: #666;
+}
+
+.app-main p, .app-main span {
   color: #666;
 }
 

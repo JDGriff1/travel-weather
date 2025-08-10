@@ -6,8 +6,8 @@ import { getTravelDataAsync } from "../../services/TravelServices";
 
 export const RoutePlanner = () => {
     const { t } = useTranslation();
-    const [origin, setOrigin] = useState("");
-    const [destination, setDestination] = useState("");
+    const [origin, setOrigin] = useState("a");
+    const [destination, setDestination] = useState("v");
     const [results, setResults] = useState({});
     const [loading, setLoading] = useState(false);
 
