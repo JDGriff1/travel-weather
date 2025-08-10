@@ -9,7 +9,11 @@ function summariseForecast(forecast) {
             end: hour.interval.endTime
         },
         temperature: hour.temperature,
-        condition: hour.weatherCondition?.description
+        condition: {
+            description: hour.weatherCondition?.description,
+            type: hour.weatherCondition?.type,
+            iconSrc: hour.weatherCondition?.iconBaseUri + ".svg"
+        }
     }));
 
     return forecastSummary;
