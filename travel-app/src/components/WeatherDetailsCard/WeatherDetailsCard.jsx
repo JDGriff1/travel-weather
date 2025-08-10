@@ -14,7 +14,7 @@ export const WeatherDetailsCard = ({ weather, title }) => {
     }
 
     return (
-        <div className="details-card">
+        <div className="details-card weather-card">
             <h2 className="weather-details-title">{title}</h2>
             {weather.map((entry, index) => (
                 <div key={index} className="weather-row">

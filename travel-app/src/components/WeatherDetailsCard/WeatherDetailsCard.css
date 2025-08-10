@@ -18,3 +18,9 @@
 .weather-description {
     text-align: right;
 }
+
+.weather-card {
+    width: 325px;
+    height: 400px;
+    overflow-y: auto;
+}
