@@ -8,7 +8,8 @@
       "destinationLabel": "Destination",
       "originPlaceholder": "Enter origin",
       "destinationPlaceholder": "Enter destination",
-      "planRouteButton": "Plan Route",
+      "getRouteWeatherButton": "Get Route Weather",
+      "getRouteWeatherDetailedButton": "Get Route Weather Detailed",
       "validationError": "Please enter both origin and destination.",
       "fetchError": "Failed to fetch route details. Please try again."
     },

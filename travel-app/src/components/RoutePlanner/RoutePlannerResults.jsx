@@ -14,6 +14,11 @@ export const RoutePlannerResults = ({ results, loading, onSearchAgain }) => {
         return <div className="no-results">{t('routePlanner.results.noResults')}</div>;
     }
 
+    if (loading) {
+        return <div className="loading">{t('routePlanner.results.loading')}</div>;
+    }
+
+    const detailedResults = results?.summary?.sampleStepsWeather?.length > 0;
     const summaryCard = results.summary ? (
         <RouteDetailsCard
             route={results.summary}
@@ -32,18 +37,31 @@ export const RoutePlannerResults = ({ results, loading, onSearchAgain }) => {
             weather={results.summary.end.weather} />
     ) : null;
 
-    if (loading) {
-        return <div className="loading">{t('routePlanner.results.loading')}</div>;
+    const detailedWeather = detailedResults
+        ? results?.summary?.sampleStepsWeather.map((step, index) => (
+            <WeatherDetailsCard
+                key={step.location + index}
+                title={step.address}
+                weather={step.weather} />
+        ))
+        : [];
+
+    const weather = [startWeather];
+    if (detailedResults) {
+        weather.push(...detailedWeather);
     }
+    weather.push(endWeather);
 
     return (
         <div className="route-planner-results">
-            <h2>{t('routePlanner.results.title')}</h2>
             <div className="route-details">
                 <div>{summaryCard}</div>
                 <div className="flex flex-row align-items-center gap-2">
-                    <div className="flex-grow-1">{startWeather}</div>
-                    <div className="flex-grow-1">{endWeather}</div>
+                    {weather.map((w, index) => (
+                        <div key={index} className="flex-grow-1">
+                            {w}
+                        </div>
+                    ))}
                 </div>
             </div>
             <div className="results-actions">

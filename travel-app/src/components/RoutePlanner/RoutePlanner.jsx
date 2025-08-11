@@ -2,12 +2,12 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { RoutePlannerResults } from "./RoutePlannerResults";
 import { RoutePlannerSearch } from "./RoutePlannerSearch";
-import { getTravelDataAsync } from "../../services/TravelServices";
+import { getDetailedTravelDataAsync, getTravelDataAsync } from "../../services/TravelServices";
 
 export const RoutePlanner = () => {
     const { t } = useTranslation();
-    const [origin, setOrigin] = useState("a");
-    const [destination, setDestination] = useState("v");
+    const [origin, setOrigin] = useState("");
+    const [destination, setDestination] = useState("");
     const [results, setResults] = useState({});
     const [loading, setLoading] = useState(false);
 
@@ -19,13 +19,13 @@ export const RoutePlanner = () => {
         setDestination(value);
     };
 
-    const clickPlanRoute = () => {
+    const clickPlanRoute = async (detailed = false) => {
         if (!origin || !destination) {
             alert(t('routePlanner.search.validationError'));
             return;
         }
         setLoading(true);
-        getRouteDetails();
+        await getRouteDetails(detailed);
     }
 
     const clickOnSearchAgain = () => {
@@ -35,8 +35,14 @@ export const RoutePlanner = () => {
         setLoading(false);
     }
 
-    const getRouteDetails = async () => {
-        const response = await getTravelDataAsync(origin, destination);
+    const getRouteDetails = async (detailed) => {
+        let response;
+        if (detailed) {
+            response = await getDetailedTravelDataAsync(origin, destination);
+        } else {
+            response = await getTravelDataAsync(origin, destination);
+        }
+
         setLoading(false);
         if (response && response.route) {
             setResults(response.route);
@@ -50,7 +56,13 @@ export const RoutePlanner = () => {
     if (!Object.keys(results).length && !loading) {
         return (
             <div className="route-planner">
-                <RoutePlannerSearch onPlanRoute={clickPlanRoute} origin={origin} destination={destination} handleOriginChange={handleOriginChange} handleDestinationChange={handleDestinationChange} />
+                <RoutePlannerSearch 
+                    onPlanRoute={() => clickPlanRoute(false)}
+                    onPlanDetailedRoute={() => clickPlanRoute(true)}
+                    origin={origin}
+                    destination={destination}
+                    handleOriginChange={handleOriginChange}
+                    handleDestinationChange={handleDestinationChange} />
             </div>
         );
     }

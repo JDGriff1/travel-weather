@@ -13,3 +13,19 @@ export async function getTravelDataAsync(origin, destination) {
         return null;
     }
 }
+
+export async function getDetailedTravelDataAsync(origin, destination) {
+    try {
+        const apiBaseUrl = import.meta.env.VITE_API_URL;
+        const response = await fetch(`${apiBaseUrl}/travel/route/detailed-weather?start=${origin}&end=${destination}`);
+        if (!response.ok) {
+            console.error('Failed to fetch detailed route data:', response.statusText);
+            return null;
+        }
+
+        return response.json();
+    } catch (error) {
+        console.error('Error fetching detailed travel data:', error);
+        return null;
+    }
+}

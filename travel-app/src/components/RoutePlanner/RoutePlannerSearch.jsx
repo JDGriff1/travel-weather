@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import "./RoutePlannerSearch.css";
 import { LocationInput } from "../LocationInput/LocationInput";
 
-export const RoutePlannerSearch = ({ onPlanRoute, origin, destination, handleOriginChange, handleDestinationChange }) => {
+export const RoutePlannerSearch = ({ onPlanRoute, onPlanDetailedRoute, origin, destination, handleOriginChange, handleDestinationChange }) => {
     const { t } = useTranslation();
     
     return (
@@ -17,7 +17,8 @@ export const RoutePlannerSearch = ({ onPlanRoute, origin, destination, handleOri
                     <LocationInput label={t('routePlanner.search.destinationLabel')} value={destination} onChange={handleDestinationChange} />
                 </div>
                 <div className="route-planner-actions">
-                    <button className="plan-route-button" onClick={onPlanRoute}>{t('routePlanner.search.planRouteButton')}</button>
+                    <button className="plan-route-button mr-2" onClick={onPlanRoute}>{t('routePlanner.search.getRouteWeatherButton')}</button>
+                    <button className="plan-route-button" onClick={onPlanDetailedRoute}>{t('routePlanner.search.getRouteWeatherDetailedButton')}</button>
                 </div>
             </div>
         </div>
