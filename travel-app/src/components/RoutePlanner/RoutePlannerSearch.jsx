@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./RoutePlannerSearch.css";
 import { LocationInput } from "../LocationInput/LocationInput";
