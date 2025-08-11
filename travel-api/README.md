@@ -24,7 +24,11 @@ This API provides endpoints for travel and weather information.
 - **GET** `/health/detailed`: Returns detailed health information about the API.
 
 ## Travel Endpoints
-## Weather Endpoints
+- **GET** `/travel/route`: Returns travel route information based on origin and destination.
+- **GET** `/travel/route/detailed-weather`: Returns detailed travel route information including weather data for sample steps.
+
+## Docs Endpoints
+- **GET** `/api-docs`: Returns the Swagger documentation for the API.
 
 # Installation
 1. Clone the repository.
