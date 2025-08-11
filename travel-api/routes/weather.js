@@ -1,19 +1,27 @@
 const express = require('express');
+const { getForecastData } = require('../services/weatherService');
 const router = express.Router();
 
-router.get('/forecast/:location', (req, res) => {
-  const { location } = req.params;
-  const { days = 5 } = req.query;
-  
-  res.json({
-    message: `${days}-day weather forecast for ${location}`,
-    location,
-    forecast: Array.from({ length: parseInt(days) }, (_, i) => ({
-      date: new Date(Date.now() + i * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-      temperature: `${20 + Math.floor(Math.random() * 10)}°C`,
-      condition: ['Sunny', 'Cloudy', 'Rainy', 'Partly Cloudy'][Math.floor(Math.random() * 4)]
-    }))
-  });
+router.get('/forecast', async (req, res) => {
+    const { longitude, latitude } = req.query;
+    if (!longitude || !latitude) {
+        return res.status(400).json({ error: 'Longitude and latitude are required' });
+    }
+
+    try {
+        const weatherResult = await getForecastData({ lat: latitude, lng: longitude });
+        if (!weatherResult) {
+            return res.status(404).json({ error: 'Weather data not found' });
+        }
+
+        return res.status(200).json({
+            message: 'Weather data retrieved successfully',
+            forecast: weatherResult
+        });
+    } catch (error) {
+        console.error('Error fetching weather data:', error);
+        return res.status(500).json({ error: 'Failed to fetch weather data' });
+    }
 });
 
 module.exports = router;

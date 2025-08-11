@@ -27,15 +27,31 @@ function getLegSummary(leg) {
         start: { address: leg.start_address, location: leg.start_location },
         end: { address: leg.end_address, location: leg.end_location },
         distance: leg.distance?.text || 'Unknown',
-        duration: leg.duration?.text || 'Unknown'
-        // steps: leg.steps.map(step => ({
-        //     instruction: step.html_instructions,
-        //     distance: step.distance.text,
-        //     duration: step.duration.text
-        // }))
+        distanceMetres: leg.distance?.value || 0,
+        duration: leg.duration?.text || 'Unknown',
+        steps: leg.steps
     };
 }
 
+function getStepsSample(journeyLength, steps) {
+    const sampledSteps = [];
+    const stepDistanceMetres = journeyLength / 4;
+    let currentDistance = 0;
+    for (let i = 0; i < steps.length; i++) {
+        const step = steps[i];
+        currentDistance += step.distance.value;
+        if (currentDistance >= stepDistanceMetres) {
+            sampledSteps.push({
+                location: step.start_location,
+            });
+            currentDistance = 0;
+        }
+    }
+
+    return sampledSteps;
+}
+
 module.exports = {
-    summariseRoute
+    summariseRoute,
+    getStepsSample
 };

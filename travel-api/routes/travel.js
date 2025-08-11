@@ -93,9 +93,10 @@
  */
 
 const express = require('express');
-const { findRoute } = require('../services/travelService');
-const { summariseRoute } = require('../helpers/routeHelper');
-const { getForecastForRoute } = require('../services/weatherService');
+const { findRoute, getSummarisedRoute, findNearby } = require('../services/travelService');
+const { summariseRoute, getStepsSample } = require('../helpers/routeHelper');
+const { getForecastForRoute, getForecastData } = require('../services/weatherService');
+const { summariseForecast } = require('../helpers/forecastHelper');
 const router = express.Router();
 
 /**
@@ -121,12 +122,7 @@ router.get('/route', async (req, res) => {
     }
 
     try {
-        const routeResult = await findRoute(start, end);
-        if (!routeResult) {
-            return res.status(404).json({ error: 'Route not found' });
-        }
-
-        const routeSummary = summariseRoute(routeResult);
+        const routeSummary = await getSummarisedRoute(start, end);
         if (!routeSummary) {
             return res.status(500).json({ error: 'Failed to summarize route' });
         }
@@ -143,6 +139,49 @@ router.get('/route', async (req, res) => {
     } catch (error) {
         console.error('Error finding route:', error);
         return res.status(500).json({ error: 'Failed to find route' });
+    }
+});
+
+router.get('/route/detailed-weather', async (req, res) => {
+    const { start, end } = req.query;
+    if (!start || !end) {
+        return res.status(400).json({ error: 'Start and end locations are required' });
+    }
+
+    try {
+        const routeResult = await findRoute(start, end);
+        if (!routeResult) {
+            return res.status(404).json({ error: 'Route not found' });
+        }
+
+        const routeSummary = summariseRoute(routeResult);
+        const routeWeather = await getForecastForRoute(routeSummary.summary.start.location, routeSummary.summary.end.location);
+
+        const sampleSteps = getStepsSample(routeSummary.summary.distanceMetres, routeSummary.summary.steps);
+        if (!sampleSteps || sampleSteps.length === 0) {
+            return res.status(500).json({ error: 'Failed to get route steps' });
+        }
+
+        const sampleStepsWeather = await Promise.all(sampleSteps.map(async (step) => {
+            const nearbyLocations = await findNearby(step.location);
+            const weather = await getForecastData(step.location);
+            return {
+                address: nearbyLocations[0].name,
+                weather: summariseForecast(weather)
+            };
+        }));
+
+        routeSummary.summary.start.weather = routeWeather.start;
+        routeSummary.summary.end.weather = routeWeather.end;
+        routeSummary.summary.sampleStepsWeather = sampleStepsWeather;
+
+        return res.status(200).json({
+            message: 'Detailed route found successfully',
+            route: routeSummary
+        });
+    } catch (error) {
+        console.error('Error finding detailed route:', error);
+        return res.status(500).json({ error: 'Failed to find detailed route' });
     }
 });
 
