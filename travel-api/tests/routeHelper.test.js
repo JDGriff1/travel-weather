@@ -54,7 +54,7 @@ describe('routeHelper', () => {
                                 end_address: "456 Oak Ave, City, State",
                                 start_location: { lat: 40.7128, lng: -74.0060 },
                                 end_location: { lat: 40.7589, lng: -73.9851 },
-                                distance: { text: "5.2 km" },
+                                distance: { text: "5.2 km", value: 5200 },
                                 duration: { text: "12 mins" }
                             }
                         ]
@@ -75,7 +75,9 @@ describe('routeHelper', () => {
                         location: { lat: 40.7589, lng: -73.9851 }
                     },
                     distance: "5.2 km",
-                    duration: "12 mins"
+                    distanceMetres: 5200,
+                    duration: "12 mins",
+                    steps: []
                 }
             });
         });
